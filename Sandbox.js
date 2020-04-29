@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"Sandbox_atlas_1", frames: [[188,0,50,52],[0,82,104,56],[82,0,104,56],[106,58,104,56],[0,0,80,80]]}
+		{name:"Sandbox_atlas_1", frames: [[82,0,104,56],[0,82,88,71],[0,0,80,80],[188,0,50,52],[90,58,104,56],[90,116,104,56]]}
 ];
 
 
@@ -143,37 +143,44 @@ lib.ssMetadata = [
 p.nominalBounds = new cjs.Rectangle(0,0,2543,1099);
 
 
-(lib.CachedBmp_3552 = function() {
+(lib.CachedBmp_3551 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_3549 = function() {
+(lib.CachedBmp_7256 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_3550 = function() {
+(lib.CachedBmp_7181 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_3551 = function() {
+(lib.CachedBmp_3552 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(3);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_7181 = function() {
+(lib.CachedBmp_3549 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(4);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_3550 = function() {
+	this.initialize(ss["Sandbox_atlas_1"]);
+	this.gotoAndStop(5);
 }).prototype = p = new cjs.Sprite();
 // helper functions:
 
@@ -246,6 +253,20 @@ p.nominalBounds = new cjs.Rectangle(-25.9,-24.5,52,55.1);
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-25.9,-23,52,49);
+
+
+(lib.Scene_1_Actions = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// Actions
+	this.instance = new lib.CachedBmp_7256();
+	this.instance.setTransform(517,283.9,0.5,0.5);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.Scene_1_Actions, null, null);
 
 
 (lib.Left = function(mode,startPosition,loop) {
@@ -477,7 +498,7 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 		this.CountryBox = this.Layer_1.CountryBox;
 		this.stop;
 		
-		// create a simple instance
+		/ create a simple instance
 		// by default, it only adds horizontal recognizers
 		var mm = new Hammer(myElement);
 		
@@ -637,6 +658,19 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 
 	this.timeline.addTween(cjs.Tween.get(this.___camera___instance).wait(1));
 
+	// Actions_obj_
+	this.Actions = new lib.Scene_1_Actions();
+	this.Actions.name = "Actions";
+	this.Actions.setTransform(539,301.7,1,1,0,0,0,539,301.7);
+	this.Actions.depth = 0;
+	this.Actions.isAttachedToCamera = 0
+	this.Actions.isAttachedToMask = 0
+	this.Actions.layerDepth = 0
+	this.Actions.layerIndex = 0
+	this.Actions.maskLayerName = 0
+
+	this.timeline.addTween(cjs.Tween.get(this.Actions).wait(1));
+
 	// btn_obj_
 	this.btn = new lib.Scene_1_btn();
 	this.btn.name = "btn";
@@ -645,7 +679,7 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 	this.btn.isAttachedToCamera = 1
 	this.btn.isAttachedToMask = 0
 	this.btn.layerDepth = 0
-	this.btn.layerIndex = 0
+	this.btn.layerIndex = 1
 	this.btn.maskLayerName = 0
 
 	this.timeline.addTween(cjs.Tween.get(this.btn).wait(1));
@@ -658,7 +692,7 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 	this.Layer_1.isAttachedToCamera = 0
 	this.Layer_1.isAttachedToMask = 0
 	this.Layer_1.layerDepth = 0
-	this.Layer_1.layerIndex = 1
+	this.Layer_1.layerIndex = 2
 	this.Layer_1.maskLayerName = 0
 
 	this.timeline.addTween(cjs.Tween.get(this.Layer_1).wait(1));
