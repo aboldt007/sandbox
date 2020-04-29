@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"Sandbox_atlas_1", frames: [[0,82,104,56],[188,0,50,52],[0,0,80,80],[82,0,104,56],[106,58,104,56]]}
+		{name:"Sandbox_atlas_1", frames: [[188,0,50,52],[0,82,104,56],[82,0,104,56],[106,58,104,56],[0,0,80,80]]}
 ];
 
 
@@ -143,21 +143,21 @@ lib.ssMetadata = [
 p.nominalBounds = new cjs.Rectangle(0,0,2543,1099);
 
 
-(lib.CachedBmp_3550 = function() {
+(lib.CachedBmp_3552 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_3552 = function() {
+(lib.CachedBmp_3549 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_7181 = function() {
+(lib.CachedBmp_3550 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
@@ -171,7 +171,7 @@ p.nominalBounds = new cjs.Rectangle(0,0,2543,1099);
 
 
 
-(lib.CachedBmp_3549 = function() {
+(lib.CachedBmp_7181 = function() {
 	this.initialize(ss["Sandbox_atlas_1"]);
 	this.gotoAndStop(4);
 }).prototype = p = new cjs.Sprite();
@@ -353,8 +353,8 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 		
 		function fl_ClickToGoToAndStopAtFrame_3()
 		{
-		CountryText="Ball";	
-			this.gotoAndStop(1);
+			
+		this.gotoAndStop(1);
 		}
 		this.stop();
 	}
@@ -475,45 +475,23 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 		this.Left_btn = this.btn.Left_btn;
 		this.World_mc = this.Layer_1.World_mc;
 		this.CountryBox = this.Layer_1.CountryBox;
-		var _this = this;
-		_this.stop();
-		
-		var CameraObject = AdobeAn.VirtualCamera.getCamera(exportRoot);
-		
-		var env = {
-			camInitX: CameraObject.camera.x,
-			camInitY: CameraObject.camera.y
-		};
-		
-		var zoom = false;
-		var dpr = window.devicePixelRatio;
-		
-		_this.on("click", function(event) {
-			console.log(CameraObject);
-			console.log(env);
-			if(!zoom) {
-				createjs.Tween.get(CameraObject.camera, {
-					override: true
-				}).to({
-					x: event.stageX / dpr,
-					y: event.stageY / dpr,
-					scaleX: 0.5,
-					scaleY: 0.5
-				}, 1000, createjs.Ease.circIn);
-				zoom = true;
-			} else {
-				createjs.Tween.get(CameraObject.camera, {
-					override: true
-				}).to({
-					x: env.camInitX,
-					y: env.camInitY,
-					scaleX: 1,
-					scaleY: 1
-				}, 1000, createjs.Ease.circIn);
-				zoom = false;
-			}
-		});
 		this.stop;
+		
+		// create a simple instance
+		// by default, it only adds horizontal recognizers
+		var mm = new Hammer(myElement);
+		
+		// let the pan gesture support all directions.
+		// this will block the vertical scrolling on a touch-device while on the element
+		mm.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+		
+		// listen to events...
+		mm.on("panleft panright panup pandown tap press", function(ev) {
+		    myElement.textContent = ev.type +" gesture detected.";
+		});
+		
+		
+		
 		
 		//COUNTRY TEXT
 		CountryText="test";
@@ -551,6 +529,100 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 		{
 			this.World_mc.x -= 20;
 		}
+		
+		//CLICK AND ZOOM
+		/*var _this = this;
+		_this.stop();
+		
+		var CameraObject = AdobeAn.VirtualCamera.getCamera(exportRoot);
+		
+		var env = {
+			camInitX: CameraObject.camera.x,
+			camInitY: CameraObject.camera.y
+		};
+		
+		var zoom = false;
+		var dpr = window.devicePixelRatio;
+		
+		_this.on("click", function(event) {
+			console.log(CameraObject);
+			console.log(env);
+			if(!zoom) {
+				createjs.Tween.get(CameraObject.camera, {
+					override: true
+				}).to({
+					x: event.stageX / dpr,
+					y: event.stageY / dpr,
+					scaleX: 0.5,
+					scaleY: 0.5
+				}, 1000, createjs.Ease.circIn);
+				zoom = true;
+			} else {
+				createjs.Tween.get(CameraObject.camera, {
+					override: true
+				}).to({
+					x: env.camInitX,
+					y: env.camInitY,
+					scaleX: 1,
+					scaleY: 1
+				}, 1000, createjs.Ease.circIn);
+				zoom = false;
+			}
+		});
+		
+		document.getElementById("canvas").addEventListener("mousewheel", scrollHandler);
+		
+		document.getElementById("canvas").addEventListener("DOMMouseScroll", scrollHandler);
+		
+		this.World_mc.addEventListener("mouseover", overClipHandler);
+		
+		this.World_mc.addEventListener("mouseout", outClipHandler);
+		
+		function scrollHandler(evt) {
+		
+		     if (!currentClipOver) {
+		
+		          return;
+		
+		     }
+		
+		     if (evt.wheelDelta > 0 || evt.detail > 0) {
+				//alert("up");
+				if (this.World_mc.scale >= 1.5) {
+					this.World_mc.scaleX -= 1.5;
+					this.World_mc.scaleY -= 1.5;
+				}
+		     }
+		
+		     else if (evt.wheelDelta < 0 || evt.detail < 0) {
+				//alert("down");
+				this.World_mc.scaleX += 1.5;
+				this.World_mc.scaleY += 1.5;
+		
+		     }
+		
+		}
+		
+		function overClipHandler(evt) {
+		
+		     window.currentClipOver = evt.target;
+		
+		}
+		
+		function outClipHandler(evt) {
+		
+		     window.currentClipOver = null;
+		
+		}
+		
+		
+		
+		/* For using Camera APIs, ensure that Camera is enabled in the document before publishing.
+		Animate Camera zooming to the specified value over specified duration. 
+		this.on('tick', function(){
+			var zoomPercent = 110;
+			AdobeAn.VirtualCamera.getCamera(exportRoot).zoomBy(zoomPercent);
+		});
 	}
 
 	// actions tween:
@@ -570,7 +642,7 @@ p.nominalBounds = new cjs.Rectangle(-301,-201,602,402);
 	this.btn.name = "btn";
 	this.btn.setTransform(373.5,369,1,1,0,0,0,373.5,369);
 	this.btn.depth = 0;
-	this.btn.isAttachedToCamera = 0
+	this.btn.isAttachedToCamera = 1
 	this.btn.isAttachedToMask = 0
 	this.btn.layerDepth = 0
 	this.btn.layerIndex = 0
